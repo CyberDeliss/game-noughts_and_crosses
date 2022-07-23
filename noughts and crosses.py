@@ -1,4 +1,12 @@
+'''
+It is Game "Noughts and Crosses"
+'''
+
 def display_board(board):
+    '''
+    :param board:
+    :return: none. This function to print the board
+    '''
     print("\n"*100)
     for i in range(len(board),1,-3):
         line_game(*board[i-3:i])
@@ -6,7 +14,10 @@ def display_board(board):
             print('-----------')
 
 
-def line_game(a,b,c):
+def line_game(a, b, c):
+    '''
+    This function to print one line from the board
+    '''
     if a == '#':
         a = ' '
     if b == "#":
@@ -19,6 +30,10 @@ def line_game(a,b,c):
 
 
 def player_input():
+    '''
+    Player should to choose the side
+    :return: 'x' or 'o'
+    '''
     player1 = input("Please, choose the symbol 'x' or 'o'\n")
     if player1.lower() != 'x' and player1.lower() != 'o':
         right_player1 = player_input()
@@ -27,6 +42,10 @@ def player_input():
 
 
 def position_input():
+    '''
+    Player should to choose the cell
+    :return: position from 1 to 9
+    '''
     _position = input("Please, choose the position from 1 to 9\n")
     if _position.isnumeric():
         _position = int(_position)
@@ -41,6 +60,13 @@ def position_input():
 
 
 def place_marker(_board, _marker, _position):
+    '''
+    If the cell is empty ('#'), change cell of _board (_position) to _marker
+    :param _board:
+    :param _marker: 'x' or 'o'
+    :param _position: position from 1 to 9
+    :return: True or False
+    '''
     if _board[_position] == '#':
         _board[position] = _marker
         return True
@@ -49,15 +75,27 @@ def place_marker(_board, _marker, _position):
 
 
 def win_check(_board, _mark):
+    '''
+    True if player (_mark) is winner
+    :param _board:
+    :param _mark: 'x' or 'o'
+    :return: True or False
+    '''
     #  123     456     789     159     357     147     258     369
     win = False
     win_condition = [[1,2,3], [4,5,6], [7,8,9], [1,5,9], [3,5,7], [1,4,7], [2,5,8], [3,6,9]]
     for condition in win_condition:
         if _board[condition[0]] == _board[condition[1]] == _board[condition[2]] == _mark:
             win = True
+            print(f"Player '{_mark}' is winner")
     return win
 
 def space_is_full(_board):
+    '''
+    True if the _board hasn't empty cells
+    :param _board:
+    :return: True or False
+    '''
     space = 0
     for i in range(1,len(_board)):
         if _board[i] == '#':
@@ -68,6 +106,10 @@ def space_is_full(_board):
         return True
 
 def replay():
+    '''
+    True if players want to play again
+    :return: True or False
+    '''
     answer = input("Do you want to play again? 'Yes' or 'No'\n").lower()
     if answer == "yes" or answer == 'y':
         return True
@@ -99,6 +141,4 @@ while 1:
             continue
     if not replay():
         break
-
-
 
