@@ -67,31 +67,38 @@ def space_is_full(_board):
         print('Sorry, but no one win')
         return True
 
+def replay():
+    answer = input("Do you want to play again? 'Yes' or 'No'\n").lower()
+    if answer == "yes" or answer == 'y':
+        return True
+    else:
+        return False
+
+
 
 
 
 ############## Game ####################
 
-# test_board = ['#','x','o','x','o','x','x','x','o','x']
-test_board = ['#','#','#','#','#','#','#','#','#','#']
-display_board(test_board)
+while 1:
+    # test_board = ['#','x','o','x','o','x','x','x','o','x']
+    test_board = ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
+    display_board(test_board)
+    player = player_input()
 
-player = player_input()
+    while not win_check(test_board, 'x') and not win_check(test_board, 'o') and not space_is_full(test_board):
+        position = position_input()
+        if place_marker(test_board, player, position):
+            display_board(test_board)
 
-
-
-while not win_check(test_board, 'x') and not win_check(test_board, 'o') and not space_is_full(test_board):
-    position = position_input()
-    if place_marker(test_board, player, position):
-        display_board(test_board)
-
-        if player == 'x':
-            player = 'o'
+            if player == 'x':
+                player = 'o'
+            else:
+                player = 'x'
         else:
-            player = 'x'
-    else:
-        continue
-
+            continue
+    if not replay():
+        break
 
 
 
